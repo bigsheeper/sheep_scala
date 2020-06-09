@@ -90,16 +90,16 @@ object TestKafka {
     import spark.implicits._
 
     val df = spark
-      .readStream
+      .read
       .format("kafka")
       .option("kafka.bootstrap.servers", "localhost:9092")
-      .option("subscribe", "test")
-      .option("startingOffsets", "earliest")
-      .option("endingOffsets", "latest")
+      .option("subscribe", "test,test2")
+      .option("startingOffsets", """{"test":{"0":1},"test2":{"0":1}}""")
+//      .option("endingOffsets", "latest")
       .load()
 
-    val df1 = df.selectExpr("CAST(key AS STRING)")
-      .as[(String)]
+    val df1 = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+      .as[(String, String)]
 
     df1.show()
 
