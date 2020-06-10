@@ -1,0 +1,3 @@
+[0m[[0m[0mdebug[0m] [0m[0m[watch] [spark_kafka / Compile / run] Found inputs: /home/sheep/workspace/arctern/sheep/sheep_scala/spark_kafka/*.{java,scala},/home/sheep/workspace/arctern/sheep/sheep_scala/spark_kafka/src/main/java/**/*.{java,scala},/home/sheep/workspace/arctern/sheep/sheep_scala/spark_kafka/src/main/resources/**/*,/home/sheep/workspace/arctern/sheep/sheep_scala/spark_kafka/src/main/scala/**/*.{java,scala},/home/sheep/workspace/arctern/sheep/sheep_scala/spark_kafka/src/main/scala-2.11/**/*.{java,scala}[0m
+[0m[[0m[0minfo[0m] [0m[0m1. Monitoring source files for spark_kafka/run...[0m
+[0m[[0m[0minfo[0m] [0m[0m   Press <enter> to interrupt or '?' for more options.[0m
