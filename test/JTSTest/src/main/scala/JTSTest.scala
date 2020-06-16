@@ -34,6 +34,7 @@ object JTSTest {
     val g4 = new WKBReader().read(wkb)
     println(s"geometry from wkb : ${g4}")
 
+    val point1 = new GeometryFactory().createPoint(new Coordinate(1, 1))
   }
 
 }
