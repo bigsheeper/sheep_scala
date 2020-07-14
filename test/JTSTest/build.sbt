@@ -12,3 +12,18 @@ libraryDependencies ++= Seq(
   "org.geotools" % "gt-main" % "23.1",
   "org.geotools" % "gt-referencing" % "23.1",
 )
+
+val sparkVersion = Option(System.getProperty("sparkVersion")).getOrElse("3.0.0")
+if (sparkVersion == "3.0.0") {
+  println("Build arctern with spark-3.0.0")
+  libraryDependencies += "org.apache.spark" %% "spark-core" % sparkVersion
+  libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion
+} else if (sparkVersion == "2.4.5") {
+  println("Build arctern with spark-2.4.5")
+  libraryDependencies += "org.apache.spark" %% "spark-core" % sparkVersion
+  libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion
+} else {
+  println("Unrecognized spark version, build arctern with default version: spark-3.0.0")
+  libraryDependencies += "org.apache.spark" %% "spark-core" % "3.0.0"
+  libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.0.0"
+}

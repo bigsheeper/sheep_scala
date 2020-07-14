@@ -24,9 +24,6 @@ import java.util.List;
 
 import static java.lang.StrictMath.acos;
 
-//import org.geotools.geometry.jts.JTS;
-//import org.geotools.referencing.CRS;
-
 public class TestJavaJTS {
     public static void test_geotools_curve() throws ParseException {
         Geometry fdsgdg = new org.geotools.geometry.jts.WKTReader2().read("CURVEPOLYGON(CIRCULARSTRING(0 0, 4 0, 4 4, 0 4, 0 0))");
@@ -38,9 +35,6 @@ public class TestJavaJTS {
         System.setProperty("org.geotools.referencing.forceXY", "true");
         Geometry geometry = new WKTReader().read("POINT (1 1)");
         System.out.println(geometry);
-//        CoordinateReferenceSystem sourceCRScode = CRS.decode("EPSG:4326");
-//        CoordinateReferenceSystem targetCRScode = CRS.decode("EPSG:3857");
-//        MathTransform transform = CRS.findMathTransform(CRS.decode("EPSG:4326"), CRS.decode("EPSG:3857"));
         Geometry res = org.geotools.geometry.jts.JTS.transform(geometry, org.geotools.referencing.CRS.findMathTransform(org.geotools.referencing.CRS.decode("EPSG:4326"), org.geotools.referencing.CRS.decode("EPSG:3857")));
     }
 
@@ -54,6 +48,14 @@ public class TestJavaJTS {
         } catch (FactoryException | TransformException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void testGeoFromText() throws ParseException {
+        LinearRing fdsgdg = (LinearRing)new org.geotools.geometry.jts.WKTReader2().read("LINEARRING (0 0, 1 0, 1 1, 0 1, 0 0)");
+        String tdyhdfh = fdsgdg.getGeometryType();
+        LineString aaaaa = new GeometryFactory().createLineString(fdsgdg.getCoordinates());
+        LineString bbbbb = new org.locationtech.jts.geom.GeometryFactory().createLineString(new org.locationtech.jts.geom.GeometryFactory().createPolygon(fdsgdg.getCoordinates()).getExteriorRing().getCoordinates());
+        String gfh = "dfgdfghd";
     }
 
     public static void test_curve() throws ParseException {
@@ -92,7 +94,6 @@ public class TestJavaJTS {
         Geometry dfdgdfghfgh = ggggggg.union(aaaaaaa);
         String dfgfgh = asdf.getGeometryType();
 
-//        MultiPolygon dfghdfgh = (MultiPolygon) new WKTReader().read("multipolygon (((0 0, 10 0, 10 10, 0 10, 0 0), (11 11, 20 11, 20 20, 20 11, 11 11)))");
         MultiPolygon dfghdfgh = (MultiPolygon) new WKTReader().read("MULTIPOLYGON (((0 0, 10 0, 10 10, 0 10, 0 0)), ((11 11, 20 11, 20 20, 20 11, 11 11)))");
         Geometry gdfgdfh = dfghdfgh.getEnvelope();
         String fghg = "fsdgdfhdfh";
@@ -100,7 +101,7 @@ public class TestJavaJTS {
         GeometryCollection dfgdfg = new org.locationtech.jts.geom.GeometryFactory().createGeometryCollection();
     }
 
-    public static void main(String[] args) throws ParseException {
+    public static void testOthers() throws ParseException {
         Coordinate[] coordinates = new Coordinate[5];
         coordinates[0] = new Coordinate(2, 2);
         coordinates[1] = new Coordinate(1, 1);
@@ -121,8 +122,6 @@ public class TestJavaJTS {
 
         Boolean isvalidop = geometry != null && new IsValidOp(geometry).isValid();
 
-//        System.out.println(isvalidop);
-
         Boolean isSimple = geometry != null && geometry.isSimple();
 
         String type = geometry.getGeometryType();
@@ -139,7 +138,6 @@ public class TestJavaJTS {
         Geometry stedrytr = org.locationtech.jts.precision.GeometryPrecisionReducer.reduce(geometry, new org.locationtech.jts.geom.PrecisionModel(34));
 
         Geometry geometry1 = new WKTReader().read("POLYGON EMPTY");
-        ;
 
         Geometry inter = new WKTReader().read("POINT (50 50)").intersection(new WKTReader().read("POLYGON ((0 0, 40 0, 40 40, 0 40, 0 0))"));
 
@@ -152,9 +150,6 @@ public class TestJavaJTS {
         Double gfg = org.locationtech.jts.algorithm.distance.DiscreteHausdorffDistance.distance(geometry, geometry1);
 
         Boolean agfsdg = geometry.crosses(geometry1);
-
-//        Geometry gdfgdfhfgh = JTS.Trans
-
 
         Geometry point = new WKTReader().read("POINT (1 1)");
 
@@ -182,15 +177,8 @@ public class TestJavaJTS {
 
         }
 
-//        test_curve();
-//        test_geotools_curve();
         test_collection();
-//        AffineTransformation affineTransformation = new AffineTransformation();
-//
-//        affineTransformation = affineTransformation.translate(-5, 24);
-//        System.out.println(geometry.getCoordinates()[0]);
         Geometry fgfg = new org.locationtech.jts.geom.util.AffineTransformation().translate(-5, 24).transform(geometry);
-//        System.out.println(fgfg.getCoordinates()[0]);
 
         Geometry rotate1 = new WKTReader().read("LINESTRING (0 0,5 0)");
 
@@ -214,7 +202,7 @@ public class TestJavaJTS {
 
         geometry.getBoundary();
 
-        Geometry geometry2 = new WKTReader().read("POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))");
+        Geometry geometry2 = new org.locationtech.jts.io.WKTReader().read("POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))");
         Geometry polygon = geometry2.getGeometryType().equals("Polygon") ? geometry2 : new org.locationtech.jts.geom.GeometryFactory().createPolygon(geometry2.getCoordinates()).getExteriorRing();
 
         p.getExteriorRing();
@@ -222,7 +210,42 @@ public class TestJavaJTS {
         Geometry dfgfhfghj = new org.locationtech.jts.geom.util.AffineTransformation().scale(1, 0).transform(rotate1);
 
         Geometry fsvertdg = new org.locationtech.jts.geom.util.AffineTransformation(2, 2, 2, 2, 2, 2).transform(rotate1);
+    }
 
-        System.out.println("dsfdsgdfgdfghdf");
+    public static void testValid() throws ParseException {
+        Geometry geometry = new WKTReader2().read("POLYGON ((0, 1 0, 1 1, 0 1, 0))");
+        String s = geometry.toString();
+        System.out.println(s);
+    }
+
+    public static void testEmpty() throws ParseException {
+        Geometry geometry = new org.locationtech.jts.io.WKTReader().read("GEOMETRY EMPTY");
+        System.out.println(geometry.toText());
+    }
+
+    public static void testCollection() throws ParseException {
+        org.apache.spark.sql.catalyst.util.GenericArrayData aaa = new org.apache.spark.sql.catalyst.util.GenericArrayData(new java.util.ArrayList());
+        final int project_numElements_0 = aaa.numElements();
+        System.out.println(project_numElements_0);
+        Geometry geometry = new WKTReader2().read("CURVEPOLYGON(CIRCULARSTRING(0 0, 4 0, 4 4, 0 4, 0 0),(1 1, 3 3, 3 1, 1 1))");
+//        Geometry geometry = new WKTReader2().read("MULTISURFACE(CURVEPOLYGON(CIRCULARSTRING(0 0, 4 0, 4 4, 0 4, 0 0),(1 1, 3 3, 3 1, 1 1)))");
+        System.out.println(geometry.toText());
+        System.out.println(geometry.getGeometryType());
+        System.out.println(geometry.getLength());
+    }
+
+    public static void TestExteriorring() throws ParseException {
+        Geometry geometry = new WKTReader2().read("POLYGON ((35 10, 45 45, 15 40, 10 20, 35 10), (20 30, 35 35, 30 20, 20 30))");
+        org.locationtech.jts.geom.Polygon p = (org.locationtech.jts.geom.Polygon)geometry;
+        Geometry rst = p.getExteriorRing();
+        System.out.println(rst.toText());
+    }
+
+    public static void main(String[] args) throws ParseException {
+        // testGeoFromText();
+        // testValid();
+        // testEmpty();
+        // testCollection();
+        TestExteriorring();
     }
 }
